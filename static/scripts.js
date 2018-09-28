@@ -46,11 +46,28 @@ $(document).ready(function() {
     });
 
     // Center map on clients location if geolocation available
+    // src: https://stackoverflow.com/questions/38759114/how-to-add-a-current-location-marker-on-google-map
     if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function (position) {
-        initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        map.setCenter(initialLocation);
+    navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        };
+        var marker = new google.maps.Marker({
+            position: pos,
+            map: map,
+            title: 'Your position',
+            icon: {
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: 10
+            }
         });
+        map.setCenter(pos);
+    }, function() {
+        //handle location error (i.e. if user disallowed location access manually)
+    });
+    } else {
+    // Browser doesn't support Geolocation
     }
 
 });

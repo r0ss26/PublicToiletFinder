@@ -23,9 +23,7 @@ def after_request(response):
 @app.route("/")
 def index():
     """Render map"""
-    if not os.environ.get("API_KEY"):
-        raise RuntimeError("API_KEY not set")
-    return render_template("index.html", key=os.environ.get("API_KEY"))
+    return render_template("index.html", key="AIzaSyCvA0_G9g9t2Uxs-Vjv_V81Sosn-gxjg3g")
 
 
 @app.route("/search")
