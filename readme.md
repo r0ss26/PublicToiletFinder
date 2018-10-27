@@ -5,6 +5,7 @@ nearby location. Users can also search for a specific location. Data for this ap
 data portal (https://www.data.act.gov.au/Infrastructure-and-Utilities/Public-Toilets-in-the-ACT/3tyf-txjn).
 
 # URL
+https://public-toilet-finder.herokuapp.com
 
 # Author
 
