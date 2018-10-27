@@ -10,6 +10,6 @@ https://public-toilet-finder.herokuapp.com
 # Author
 
 Ross Baker
-Made for CS50x's Final Project
-Project spec: https://docs.cs50.net/2018/x/project/project.html
+Made for CS50x's Final Project  
+Project spec: https://docs.cs50.net/2018/x/project/project.html  
 Based on Problem Set 8: https://docs.cs50.net/2018/x/psets/8/pset8.html
