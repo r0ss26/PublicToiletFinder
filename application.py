@@ -1,15 +1,21 @@
 import os
 import re
 from flask import Flask, jsonify, render_template, request
+from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker
 
 from cs50 import SQL
 
 # Configure application
 app = Flask(__name__)
 
-# Configure CS50 Library to use SQLite database
-db = SQL("sqlite:///toilet_finder.db")
+# Check for environment variable
+if not os.getenv("DATABASE_URL"):
+    raise RuntimeError("DATABASE_URL is not set")
 
+# Set up database
+engine = create_engine(os.getenv("DATABASE_URL"))
+db = scoped_session(sessionmaker(bind=engine))
 
 # Ensure responses aren't cached
 @app.after_request
@@ -19,18 +25,18 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
-
 @app.route("/")
 def index():
+
     """Render map"""
-    return render_template("index.html", key="AIzaSyCvA0_G9g9t2Uxs-Vjv_V81Sosn-gxjg3g")
+    return render_template("index.html", key=os.getenv('API_KEY'))
 
 
 @app.route("/search")
 def search():
-    """Search for places that match query"""
 
+    """Search for places that match query"""
     q = request.args.get("q") + "%"
-    matches = db.execute("SELECT * FROM suburbs WHERE postcode LIKE :q OR suburb LIKE :q", q=q)
+    matches = db.execute("SELECT * FROM suburbs WHERE postcode LIKE :q OR suburb LIKE :q", {"q": q})
 
     return jsonify(matches)
