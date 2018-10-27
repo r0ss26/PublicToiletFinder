@@ -102,9 +102,6 @@ function configure()
 
         // Set map's center
         map.setCenter({lat: parseFloat(suggestion.latitude), lng: parseFloat(suggestion.longitude)});
-
-        // Update UI
-        update();
     });
 
     // Hide info window when text box has focus
@@ -119,9 +116,6 @@ function configure()
         event.stopPropagation && event.stopPropagation();
         event.cancelBubble && event.cancelBubble();
     }, true);
-
-    // Give focus to text box
-    $("#q").focus();
 }
 
 
